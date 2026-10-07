@@ -96,6 +96,12 @@ class FuelPrice(models.Model):
 
     class Meta:
         ordering = ["-recorded_at"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["station", "fuel_type", "recorded_at"],
+                name="unique_station_fuel_timestamp",
+            )
+        ]
 
     def __str__(self):
         return f"{self.station} - {self.fuel_type}: {self.price}"
