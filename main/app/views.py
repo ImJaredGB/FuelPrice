@@ -26,6 +26,7 @@ from .serializers import (
     FuelPriceSerializer,
 )
 
+# ---- Inactivo ----
 @api_view(["GET"])
 def fuel(request):
 
@@ -52,6 +53,7 @@ def fuel(request):
         )
     
     return Response(data)
+# --------
 
 @api_view(["GET"])
 def regions(request):

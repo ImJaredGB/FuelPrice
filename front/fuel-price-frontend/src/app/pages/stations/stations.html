@@ -1,0 +1,109 @@
+<h1>Fuel Stations</h1>
+
+<div>
+
+  <label for="province">Province</label>
+
+  <select
+    id="province"
+    [(ngModel)]="selectedProvince"
+    (change)="onProvinceChange()"
+  >
+    <option value="">Select a province</option>
+
+    @for (province of provinces; track province.id) {
+      <option [value]="province.api_id">
+        {{ province.name }}
+      </option>
+    }
+  </select>
+
+</div>
+
+
+<div>
+
+  <label for="municipality">Municipality</label>
+
+  <select
+    id="municipality"
+    [(ngModel)]="selectedMunicipality"
+  >
+    <option value="">All municipalities</option>
+
+    @for (municipality of filteredMunicipalities; track municipality.id) {
+      <option [value]="municipality.api_id">
+        {{ municipality.name }}
+      </option>
+    }
+  </select>
+
+</div>
+
+
+<div>
+
+  <label for="fuel">Fuel</label>
+
+  <select
+    id="fuel"
+    [(ngModel)]="selectedFuel"
+  >
+    <option value="">Select a fuel</option>
+
+    @for (fuel of fuelTypes; track fuel.id) {
+      <option [value]="fuel.code">
+        {{ fuel.name }}
+      </option>
+    }
+  </select>
+
+</div>
+
+
+<button (click)="searchStations()">
+  Search
+</button>
+
+
+@if (loading) {
+
+  <p>Loading stations...</p>
+
+} @else if (stations.length === 0) {
+
+  <p>No stations found.</p>
+
+} @else {
+
+  <p>Total stations: {{ stations.length }}</p>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Station</th>
+        <th>Address</th>
+        <th>Postal Code</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      @for (station of stations; track station.id) {
+
+        <tr>
+          <td>{{ station.name }}</td>
+          <td>{{ station.address }}</td>
+          <td>{{ station.postal_code }}</td>
+          <td>{{ station.price }} €</td>
+        </tr>
+
+      }
+
+    </tbody>
+
+  </table>
+
+}
