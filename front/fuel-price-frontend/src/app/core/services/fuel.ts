@@ -7,6 +7,13 @@ import { Province } from '../models/province';
 import { Municipality } from '../models/municipality';
 import { FuelType } from '../models/fuel-type';
 
+export interface ProvinceComparation {
+  province_api_id: string;
+  province: string;
+  average_price: string | null;
+  station_count: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -59,4 +66,14 @@ export class FuelService {
       { params }
     );
   }
+
+  getProvinceComparation(fuelCode: string) {
+    return this.http.get<ProvinceComparation[]>(
+      `${this.apiUrl}/fuel/province-comparation/`,
+      {
+        params: { fuel_type: fuelCode }
+      }
+    );
+  }
 }
+

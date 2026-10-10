@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { FuelUpdateControlComponent } from '../../components/fuel-update-control';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [FuelUpdateControlComponent],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

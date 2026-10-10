@@ -1,0 +1,32 @@
+
+<section class="fuel-update-control">
+  <h2>Actualización de precios</h2>
+
+  <p *ngIf="loading">Consultando configuración...</p>
+
+  <ng-container *ngIf="!loading">
+    <p>
+      Estado:
+      <strong>
+        {{ enabled ? 'Activada' : 'Desactivada' }}
+      </strong>
+    </p>
+
+    <button
+      type="button"
+      [disabled]="saving"
+      (click)="toggleUpdate()"
+    >
+      {{
+        saving
+          ? 'Guardando...'
+          : enabled
+            ? 'Desactivar actualización automática'
+            : 'Activar actualización automática'
+      }}
+    </button>
+  </ng-container>
+
+  <p *ngIf="message" role="status">{{ message }}</p>
+  <p *ngIf="errorMessage" role="alert">{{ errorMessage }}</p>
+</section>

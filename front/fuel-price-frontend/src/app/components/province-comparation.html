@@ -1,0 +1,53 @@
+
+<section>
+  <h2>Comparativa de precios por provincia</h2>
+
+  <label for="fuelType">Combustible:</label>
+
+  <select
+    id="fuelType"
+    [value]="selectedFuelCode"
+    (change)="onFuelChange($event)"
+  >
+    <option
+      *ngFor="let fuel of fuelTypes"
+      [value]="fuel.code"
+    >
+      {{ fuel.name }}
+    </option>
+  </select>
+
+  <p *ngIf="loading">Cargando comparativa...</p>
+
+  <p *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
+
+  <table *ngIf="!loading && provinces.length > 0">
+    <thead>
+      <tr>
+        <th>Provincia</th>
+        <th>Precio medio</th>
+        <th>Estaciones incluidas</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let province of provinces">
+        <td>{{ province.province }}</td>
+        <td>
+          {{
+            province.average_price !== null
+              ? province.average_price + ' €/L'
+              : 'Sin datos'
+          }}
+        </td>
+        <td>{{ province.station_count }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && !errorMessage && provinces.length === 0">
+    No hay precios disponibles para este combustible.
+  </p>
+</section>

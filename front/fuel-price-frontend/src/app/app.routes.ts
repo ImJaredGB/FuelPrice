@@ -15,6 +15,13 @@ export const routes: Routes = [
         m => m.Stations
       )
   },
+    {
+    path: 'comparation',
+    loadComponent: () =>
+      import('./pages/comparation/comparation').then(
+        m => m.Comparation
+      )
+  },
   {
     path: '**',
     loadComponent: () =>
