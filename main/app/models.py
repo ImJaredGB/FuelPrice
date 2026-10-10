@@ -105,3 +105,15 @@ class FuelPrice(models.Model):
 
     def __str__(self):
         return f"{self.station} - {self.fuel_type}: {self.price}"
+
+class FuelUpdateConfig(models.Model):
+    enabled = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Configuración de actualización"
+        verbose_name_plural = "Configuración de actualización"
+
+    def __str__(self):
+        status = "Activada" if self.enabled else "Desactivada"
+        return f"Actualización automática: {status}"
